@@ -36,8 +36,11 @@ var Note = React.createClass({
   displayName: "Note",
 
   remove: function remove() {
-    recipes.splice(this.props.index, 1);
-    update();
+    if(confirm('Are You Sure?')){
+       recipes.splice(this.props.index, 1);
+       update();
+    }
+    
   },
   edit: function edit() {
     globalTitle = this.props.title;
@@ -51,7 +54,7 @@ var Note = React.createClass({
       React.createElement(
         "h4",
         { className: "text-center" },
-        "Ingredients"
+        "Sub Notes"
       ),
       React.createElement("hr", null),
       React.createElement(IngredientList, { ingredients: this.props.ingredients }),
@@ -112,7 +115,7 @@ var RecipeAdd = React.createClass({
       $("#ingredients").val(globalIngredients);
       if (globalTitle != "") {
         $("#modalTitle").text("Edit Note");
-        $("#addButton").text("Edit Note");
+        $("#addButton").text("Save Note");
       }
     } else requestAnimationFrame(this.open);
   },
